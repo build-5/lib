@@ -1,21 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Timestamp } from '@soonaverse/interfaces';
+import { Timestamp } from '@build-5/interfaces';
 import { isEqual } from 'lodash';
 
 export const processObjectArray = <T>(array: any[]) =>
   array.map((obj) => processObject(obj)) as T[];
 
-export const processObject = <R>(obj: any) =>
-  Object.entries(obj).reduce(
+export const processObject = <R>(obj: any) => {
+  const entries = Object.entries(obj);
+  if (!entries.length) {
+    return undefined;
+  }
+  return entries.reduce(
     (acc, [key, val]) => ({ ...acc, [key]: processValue(val) }),
     {} as Record<string, unknown>,
   ) as R;
+};
 
 const processValue = (value: any): any => {
-  if (value instanceof Array) {
+  if (value && Array.isArray(value)) {
     return value.map(processValue);
   }
-  if (value instanceof Object) {
+  if (value && typeof value === 'object') {
     const keys = Object.keys(value);
     if (isEqual(keys, ['_seconds', '_nanoseconds'])) {
       return new Timestamp(value._seconds, value._nanoseconds);

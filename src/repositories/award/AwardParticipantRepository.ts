@@ -3,13 +3,13 @@ import {
   Opr,
   PublicCollections,
   PublicSubCollections,
-} from '@soonaverse/interfaces';
-import { SoonEnv } from '../../Config';
+} from '@build-5/interfaces';
+import { Build5Env } from '../../Config';
 import { SubCrudRepository } from '../SubCrudRepository';
 
 export class AwardParticipantRepository extends SubCrudRepository<AwardParticipant> {
-  constructor(env?: SoonEnv) {
-    super(env || SoonEnv.PROD, PublicCollections.AWARD, PublicSubCollections.PARTICIPANTS);
+  constructor(env?: Build5Env) {
+    super(env || Build5Env.PROD, PublicCollections.AWARD, PublicSubCollections.PARTICIPANTS);
   }
 
   public getParticipantsLive = (

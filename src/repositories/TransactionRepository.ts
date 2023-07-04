@@ -3,15 +3,15 @@ import {
   Opr,
   PublicCollections,
   Transaction,
-  TransactionAwardType,
+  TransactionPayloadType,
   TransactionType,
-} from '@soonaverse/interfaces';
-import { SoonEnv } from '../Config';
+} from '@build-5/interfaces';
+import { Build5Env } from '../Config';
 import { CrudRepository } from './CrudRepository';
 
 export class TransactionRepository extends CrudRepository<Transaction> {
-  constructor(env?: SoonEnv) {
-    super(env || SoonEnv.PROD, PublicCollections.TRANSACTION);
+  constructor(env?: Build5Env) {
+    super(env || Build5Env.PROD, PublicCollections.TRANSACTION);
   }
 
   public getBadgesForMemberLive = (
@@ -23,7 +23,7 @@ export class TransactionRepository extends CrudRepository<Transaction> {
     const params = {
       collection: this.col,
       fieldName,
-      fieldValue: [member, TransactionType.AWARD, TransactionAwardType.BADGE],
+      fieldValue: [member, TransactionType.AWARD, TransactionPayloadType.BADGE],
       operator: fieldName.map(() => Opr.EQUAL),
       startAfter,
       orderBy,

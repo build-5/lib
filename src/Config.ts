@@ -1,35 +1,26 @@
-import { ApiRoutes, PING_INTERVAL } from '@soonaverse/interfaces';
-import { wrappedFetch } from './fetch.utils';
-import { randomString } from './utils';
+import { ApiRoutes } from '@build-5/interfaces';
 
-export enum SoonEnv {
-  PROD = 'https://api.soonaverse.com/api',
-  TEST = 'https://api-wen2.soonaverse.com/api',
+export enum Build5Env {
+  PROD = 'https://api.build5.com/api',
+  TEST = 'https://api-wen.build5.com/api',
   DEV = 'https://soonaverse-dev.web.app/api',
   LOCAL = 'http://127.0.0.1:5001/soonaverse-dev/us-central1/api',
 }
 
-export const getByIdUrl = (baseUrl: SoonEnv) => baseUrl + ApiRoutes.GET_BY_ID;
+export const getByIdUrl = (baseUrl: Build5Env) => baseUrl + ApiRoutes.GET_BY_ID;
 
-export const getManyUrl = (baseUrl: SoonEnv) => baseUrl + ApiRoutes.GET_MANY;
+export const getManyByIdUrl = (baseUrl: Build5Env) => baseUrl + ApiRoutes.GET_MANY_BY_ID;
 
-export const getManyAdvancedUrl = (baseUrl: SoonEnv) => baseUrl + ApiRoutes.GET_MANY_ADVANCED;
+export const getManyUrl = (baseUrl: Build5Env) => baseUrl + ApiRoutes.GET_MANY;
 
-export const getUpdatedAfterUrl = (baseUrl: SoonEnv) => baseUrl + ApiRoutes.GET_UPDATED_AFTER;
+export const getManyAdvancedUrl = (baseUrl: Build5Env) => baseUrl + ApiRoutes.GET_MANY_ADVANCED;
 
-export const getTokenPriceUrl = (baseUrl: SoonEnv) => baseUrl + ApiRoutes.GET_TOKEN_PRICE;
+export const getUpdatedAfterUrl = (baseUrl: Build5Env) => baseUrl + ApiRoutes.GET_UPDATED_AFTER;
 
-export const getAvgPriceUrl = (baseUrl: SoonEnv) => baseUrl + ApiRoutes.GET_AVG_PRICE;
+export const getTokenPriceUrl = (baseUrl: Build5Env) => baseUrl + ApiRoutes.GET_TOKEN_PRICE;
 
-export const getPriceChangeUrl = (baseUrl: SoonEnv) => baseUrl + ApiRoutes.GET_PRICE_CHANGE;
+export const getAvgPriceUrl = (baseUrl: Build5Env) => baseUrl + ApiRoutes.GET_AVG_PRICE;
 
-export const getKeepAliveUrl = (baseUrl: SoonEnv) => baseUrl + ApiRoutes.KEEP_ALIVE;
+export const getPriceChangeUrl = (baseUrl: Build5Env) => baseUrl + ApiRoutes.GET_PRICE_CHANGE;
 
-export const SESSION_ID = randomString();
-
-export const initSoonEnv = (env: SoonEnv) => {
-  setInterval(async () => {
-    const url = getKeepAliveUrl(env);
-    await wrappedFetch(url, { sessionId: SESSION_ID });
-  }, PING_INTERVAL * 0.8);
-};
+export const getKeepAliveUrl = (baseUrl: Build5Env) => baseUrl + ApiRoutes.KEEP_ALIVE;
